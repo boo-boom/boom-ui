@@ -1,0 +1,14 @@
+// @import: css的会生成一个单独的请求，scss则是直接导入
+// 创建文件时的下划线目的是为了通知sass编译器不要将文件编译入css中，引入时可忽略下划线；（下划线文件不会生成css，只能作为模块被导入）
+
+// config
+@import "variables";
+
+// layout
+@import "reboot";
+
+// mixin
+@import "mixin";
+
+// Button
+@import "../components/Button/style"
