@@ -11,4 +11,11 @@
 @import "mixin";
 
 // Button
-@import "../components/Button/style"
+@import "../components/Button/style";
+
+// Menu
+@import "../components/Menu/style";
+
+.App .item {
+  margin: 20px;
+}
