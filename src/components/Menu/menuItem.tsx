@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import classNames from 'classnames'
 import { MenuContext } from './menu'
 
-interface MenuItemProps {
-  index: number;
+export interface MenuItemProps {
+  index?: string;
   disabled?: boolean;
   style?: React.CSSProperties;
   className?: string;
@@ -17,7 +17,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
     'is-active': index === context.index,
   })
   const handleClick = () => {
-    if (context.onSelect && !disabled) {
+    if (context.onSelect && !disabled && (typeof index === 'string')) {
       context.onSelect(index)
     }
   }
@@ -29,7 +29,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
   )
 }
 
-// MenuItem.displayName
-console.log(MenuItem.displayName)
+// 可以在组件树结构中看到<MenuItem>...</MenuItem>
+MenuItem.displayName = 'MenuItem'
 
 export default MenuItem
