@@ -6,23 +6,31 @@ type MenuMode = 'horizontal' | 'vertical'
 type SelectCallBack = (selectedIndex: string) => void
 
 export interface MenuProps {
+  // 默认 active 的菜单项的索引值
   defaultIndex?: string;
+  // 自定义class
   className?: string;
+  // 菜单类型 横向或者纵向
   mode?: MenuMode;
+  // 自定义样式
   style?: React.CSSProperties;
+  // 点击菜单项触发的回掉函数
   onSelect?: SelectCallBack;
+  // 设置子菜单的默认打开 只在纵向模式下生效
+  defaultOpenSubMenus?: string[];
 }
 
 interface IMenuContext {
   index: string;
   mode?: MenuMode;
   onSelect?: SelectCallBack;
+  defaultOpenSubMenus?: string[];
 }
 
 export const MenuContext = createContext<IMenuContext>({index: '0'})
 
 const Menu: React.FC<MenuProps> = (props) => {
-  const { className, mode, defaultIndex, style, children, onSelect } = props
+  const { className, mode, defaultIndex, style, children, defaultOpenSubMenus, onSelect } = props
   const [ currentActive, setActive ] = useState(defaultIndex)
   const classes = classNames('menu', className, {
     'menu-vertical': mode === 'vertical',
@@ -35,6 +43,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   const passedContext: IMenuContext = {
     index: currentActive || '0',
     mode,
+    defaultOpenSubMenus,
     onSelect: handleClick,
   }
   const renderChildren = () => {
@@ -63,6 +72,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 Menu.defaultProps = {
   defaultIndex: '0',
   mode: 'horizontal',
+  defaultOpenSubMenus: [],
 }
 
 export default Menu
