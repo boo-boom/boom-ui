@@ -1,7 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { withInfo } from '@storybook/addon-info'
 import Button from './button'
 
 export const defaultButton = () => (
@@ -24,8 +23,8 @@ export const buttonWithType = () => (
 )
 
 storiesOf('Button', module)
-  .addDecorator(withInfo)
-  .addParameters({info: { inline: true, header: false}})
+  // .addDecorator(withInfo)
+  // .addParameters({info: { inline: true, header: false, text: `组件描述，支持markdown语法` }})
   .add('默认按钮', defaultButton)
   .add('不同尺寸按钮', buttonWithSize)
   .add('不同类型按钮', buttonWithType)

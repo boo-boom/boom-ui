@@ -1,5 +1,6 @@
 import React from 'react'
-import { configure, addDecorator } from '@storybook/react'
+import { configure, addDecorator, addParameters } from '@storybook/react'
+import { withInfo } from '@storybook/addon-info'
 import './../src/styles/index.scss'
 
 const wrapperStyle: React.CSSProperties = {
@@ -14,6 +15,8 @@ const storyWrapper = (stroyFn: any) => (
 )
 
 addDecorator(storyWrapper)
+addDecorator(withInfo)
+addParameters({info: { inline: true, header: false }})
 
 // automatically import all files ending in *.stories.js
 configure(require.context('../src/components', true, /\.stories\.tsx$/), module)

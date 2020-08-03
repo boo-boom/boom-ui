@@ -1,4 +1,4 @@
-import React, { useState, createContext, FunctionComponentElement } from 'react'
+import React, { useState, createContext, FunctionComponentElement, FC, CSSProperties } from 'react'
 import classNames from 'classnames'
 import { MenuItemProps } from './menuItem'
 
@@ -6,32 +6,38 @@ type MenuMode = 'horizontal' | 'vertical'
 type SelectCallBack = (selectedIndex: string) => void
 
 export interface MenuProps {
-  // 默认 active 的菜单项的索引值
-  defaultIndex?: string;
-  // 自定义class
-  className?: string;
-  // 菜单类型 横向或者纵向
-  mode?: MenuMode;
-  // 自定义样式
-  style?: React.CSSProperties;
-  // 点击菜单项触发的回掉函数
-  onSelect?: SelectCallBack;
-  // 设置子菜单的默认打开 只在纵向模式下生效
-  defaultOpenSubMenus?: string[];
+  /** 默认 active 的菜单项的索引值 */
+  defaultIndex?: string
+  /** 自定义class */
+  className?: string
+  /** 菜单类型 横向或者纵向 */
+  mode?: MenuMode
+  /** 自定义样式 */
+  style?: CSSProperties
+  /** 点击菜单项触发的回掉函数 */
+  onSelect?: SelectCallBack
+  /** 设置子菜单的默认打开 只在纵向模式下生效 */
+  defaultOpenSubMenus?: string[]
 }
 
 interface IMenuContext {
-  index: string;
-  mode?: MenuMode;
-  onSelect?: SelectCallBack;
-  defaultOpenSubMenus?: string[];
+  index: string
+  mode?: MenuMode
+  onSelect?: SelectCallBack
+  defaultOpenSubMenus?: string[]
 }
 
-export const MenuContext = createContext<IMenuContext>({index: '0'})
+export const MenuContext = createContext<IMenuContext>({ index: '0' })
 
-const Menu: React.FC<MenuProps> = (props) => {
+/**
+ * 为网站提供导航功能的菜单。支持横向纵向两种模式，支持下拉菜单。
+ * ~~~js
+ * import { Menu } from 'boomUI'
+ * ~~~
+ */
+export const Menu: FC<MenuProps> = (props) => {
   const { className, mode, defaultIndex, style, children, defaultOpenSubMenus, onSelect } = props
-  const [ currentActive, setActive ] = useState(defaultIndex)
+  const [currentActive, setActive] = useState(defaultIndex)
   const classes = classNames('menu', className, {
     'menu-vertical': mode === 'vertical',
     'menu-horizontal': mode !== 'vertical',
@@ -60,11 +66,9 @@ const Menu: React.FC<MenuProps> = (props) => {
     })
   }
 
-  return(
-    <ul className={classes} style={style} data-testid="test-menu">
-      <MenuContext.Provider value={passedContext}>
-        {renderChildren()}
-      </MenuContext.Provider>
+  return (
+    <ul className={classes} style={style} data-testid='test-menu'>
+      <MenuContext.Provider value={passedContext}>{renderChildren()}</MenuContext.Provider>
     </ul>
   )
 }
