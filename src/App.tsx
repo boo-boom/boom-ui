@@ -7,6 +7,7 @@ import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
 import Icon from './components/Icon/icon'
 import Transition from './components/Transition/transition'
+import Input from './components/Input/input'
 library.add(fas)
 
 function App() {
@@ -54,6 +55,10 @@ function App() {
         <Transition in={show} timeout={300} animation="zoom-in-left" wrapper>
           <Button btnType="primary" size="lg">Large Primary</Button>
         </Transition>
+      </div>
+
+      <div className="item">
+        <Input prepend="姓名" icon="coffee" size="lg" defaultValue="123123" />
       </div>
     </div>
   );
