@@ -11,20 +11,21 @@ module.exports = {
             presets: [['react-app', { flow: false, typescript: true }]],
           },
         },
-        {
-          loader: require.resolve('react-docgen-typescript-loader'),
-          options: {
-            // 只选择可枚举的属性
-            shouldExtractLiteralValuesFromEnum: true,
-            // 过滤react自身带的属性，只需要自定义的属性
-            propFilter: (prop) => {
-              if (prop.parent) {
-                return !prop.parent.fileName.includes('node_modules')
-              }
-              return true
-            },
-          },
-        },
+        // 无效...
+        // {
+        //   loader: require.resolve('react-docgen-typescript-loader'),
+        //   options: {
+        //     // type类型的属性自动展开
+        //     shouldExtractLiteralValuesFromEnum: true,
+        //     // 过滤掉不需要爬取的属性的来源
+        //     propFilter: (prop) => {
+        //       if (prop.parent) {
+        //         return !prop.parent.fileName.includes('node_modules')
+        //       }
+        //       return true
+        //     },
+        //   },
+        // },
       ],
     })
     config.resolve.extensions.push('.ts', '.tsx')
