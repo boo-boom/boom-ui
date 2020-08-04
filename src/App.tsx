@@ -9,6 +9,9 @@ import Icon from './components/Icon/icon'
 import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
 import AutoComplete from './components/AutoComplete/autoComplete'
+import Upload from './components/Upload/upload'
+// 上传组件基础知识实例
+import UploadBase from './components/Upload/test.base'
 library.add(fas)
 
 const lakers = ['bradley', 'pope', 'caruso', 'cook', 'cousins', 'james', 'AD', 'green', 'howard', 'kuzma', 'McGee', 'rando']
@@ -70,6 +73,11 @@ function App() {
 
       <div className="item">
         <AutoComplete prepend="搜索" icon="search" fetchSuggestions={handleFetch} />
+      </div>
+
+      <div className="item">
+        <UploadBase />
+        <Upload action="http://jsonplaceholder.typicode.com/posts" />
       </div>
     </div>
   );
