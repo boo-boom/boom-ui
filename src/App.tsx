@@ -8,10 +8,17 @@ import SubMenu from './components/Menu/subMenu'
 import Icon from './components/Icon/icon'
 import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
+import AutoComplete from './components/AutoComplete/autoComplete'
 library.add(fas)
+
+const lakers = ['bradley', 'pope', 'caruso', 'cook', 'cousins', 'james', 'AD', 'green', 'howard', 'kuzma', 'McGee', 'rando']
 
 function App() {
   const [show, setShow] = useState(true)
+  const handleFetch = (query: string) => {
+    return lakers.filter(item => item.includes(query)).map(value => ({ value }))
+  }
+
   return (
     <div className="App">
       <div className="item">
@@ -58,7 +65,11 @@ function App() {
       </div>
 
       <div className="item">
-        <Input prepend="姓名" icon="coffee" size="lg" defaultValue="123123" />
+        <Input prepend="姓名" icon="coffee" size="lg" />
+      </div>
+
+      <div className="item">
+        <AutoComplete prepend="搜索" icon="search" fetchSuggestions={handleFetch} />
       </div>
     </div>
   );

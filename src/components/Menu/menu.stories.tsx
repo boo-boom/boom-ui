@@ -16,4 +16,4 @@ export const defaultMenu = () => (
   </Menu>
 )
 
-storiesOf('Menu 菜单', module).add('Menu', defaultMenu)
+storiesOf('Menu', module).add('Menu', defaultMenu)
