@@ -92,7 +92,7 @@ export const AutoComplete:FC<AutoCompleteProps> = (props) => {
         <ul className="suggestion-list">
           { loading &&
             <div className="suggestion-loading-icon">
-              <Icon icon="spinner" spin/>
+              <Icon icon="spinner" spin color="#333"/>
             </div>
           }
           {
