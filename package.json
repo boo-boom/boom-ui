@@ -1,36 +1,55 @@
 {
-  "name": "boom-ui",
+  "name": "boom-component",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
+  "description": "boom-ui",
+  "author": "boom",
+  "homepage": "https://github.com/boo-boom/boom-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boo-boom/boom-ui.git"
+  },
   "keywords": [
     "Component",
     "UI",
     "React"
   ],
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "axios": "^0.19.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "react-transition-group": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "prepublish": "npm run test:nowatch && npm run lint && npm run build",
+    "lint": "eslint --ext js,ts,tsx src --max-warnings 5",
+    "test:nowatch": "cross-env CI=true react-scripts test",
     "clean": "rimraf ./dist",
-    "build:pro": "npm run clean && npm run build-ts && npm run build-css",
+    "build": "npm run clean && npm run build-ts && npm run build-css",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:nowatch && npm run lint"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -64,8 +83,12 @@
     "@types/react-transition-group": "^4.4.0",
     "@types/storybook__addon-info": "^5.2.1",
     "classnames": "^2.2.6",
+    "cross-env": "^7.0.2",
+    "husky": "^4.2.5",
     "node-sass": "^4.14.1",
+    "react": "^16.13.1",
     "react-docgen-typescript-loader": "^3.7.2",
+    "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "rimraf": "^3.0.2",
     "typescript": "~3.7.2"
