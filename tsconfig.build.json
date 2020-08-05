@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",     // 打包路径
+    "module": "ESNext",   // 标准es module引用方式
+    "target": "ES5",      // 指定ECMAScript目标版本
+    "declaration": true,  // 生成相应的 .d.ts文件
+    "jsx": "react",       // 在 .tsx文件里支持JSX
+    "moduleResolution": "Node",   // 使用Node方式查找路径方式
+    "allowSyntheticDefaultImports": true,   // 允许import react from 'react'这种引入模式
+    "skipLibCheck": true,   // 忽略所有的声明文件（ *.d.ts）的类型检查
+  },
+  "include": ["src"],
+  "exclude": [
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx",
+    "src/setupTests.ts",
+  ]
+}

@@ -1,14 +1,10 @@
 import React, { FC, useState, useEffect, useRef, ChangeEvent, ReactElement, KeyboardEvent } from 'react'
 import classNames from 'classnames'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 import Input, { InputProps } from './../Input/input'
 import Icon from './../Icon/icon'
 import Transition from './../Transition/transition'
 import useDebounce from './../../hooks/useDebounce'
 import useClickOutside from './../../hooks/useClickOutside'
-
-library.add(fas)
 
 interface DataSourceObject {
   value: string
