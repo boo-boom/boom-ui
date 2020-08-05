@@ -17,7 +17,7 @@ import 'boom-component/dist/index.css'
 import { Button } from 'boom-component'
 ~~~
 
-### 课程亮点
+### 使用技术栈
 
 * 🔥typescript with React Hooks
 * 💧渐进式的教学过程，很多章后面都有扩展作业，引导同学们深入学习和掌握知识
@@ -28,7 +28,7 @@ import { Button } from 'boom-component'
 * 🌹样式（Sass）文件从零开始，掌握大型应用的 CSS 组织方法
 * 🎉涉及全部流程，包括最后的 npm publish，husky提交发布前验证，travis CI/CD 集成，发布文档站点等
 
-### 一些本地开发命令
+### 开发命令
 
 ~~~bash
 //启动本地环境
