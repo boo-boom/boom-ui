@@ -11,7 +11,7 @@ export interface UploadFile {
   size: number
   status?: UploadFileStatus
   percent?: number
-  raw?: File    // 原文件信息
+  raw?: File // 原文件信息
   response?: any
   error?: any
 }
@@ -23,6 +23,20 @@ export interface UploadProps {
   action: string
   /** 默认文件列表 */
   defaultFileList?: UploadFile[]
+  /** 自定义文件名 */
+  name?: string
+  /** 指定允许上传文件格式 */
+  accept?: string
+  /** 多文件上传 */
+  multiple?: boolean
+  /** 支持拖拽上传 */
+  drag?: boolean
+  /** 自定义post formData（额外参数） */
+  data?: { [key: string]: any }
+  /** 是否允许携带cookie */
+  withCredentials?: boolean
+  /** 自定义headers */
+  headers?: { [key: string]: any }
   /** 文件上传之前，可对文件进行预先处理 */
   beforeUpload?: (file: File) => Boolean | Promise<File>
   /** 当前进度（百分比，当前文件） */
@@ -38,13 +52,13 @@ export interface UploadProps {
 }
 
 export const Upload: FC<UploadProps> = (props) => {
-  const { action, defaultFileList, style, beforeUpload, onProgress, onSuccess, onError, onChange, onRemove } = props
+  const { action, name, data, accept, multiple, withCredentials, headers, defaultFileList, style, beforeUpload, onProgress, onSuccess, onError, onChange, onRemove } = props
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
   const fileInput = useRef<HTMLInputElement>(null)
   // 更新fileList对应file的状态, Partial将定义的属性变为可选
   const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
-    setFileList(prevList => {
-      return prevList.map(file => {
+    setFileList((prevList) => {
+      return prevList.map((file) => {
         if (file.uid === updateFile.uid) {
           return { ...file, ...updateObj }
         } else {
@@ -63,13 +77,24 @@ export const Upload: FC<UploadProps> = (props) => {
       percent: 0,
       raw: file,
     }
-    setFileList([_file, ...fileList])
+    // 如果多文件上传，需要获取到全部fileList
+    // setFileList([_file, ...fileList])
+    // hooks传入函数，可获取到最新到数据
+    setFileList(prevList => [_file, ...prevList])
 
     const formData = new FormData()
-    formData.append(file.name, file)
+    // 优先使用传入到自定义name
+    formData.append(name || file.name, file)
+    // 如果有自定义参数则append到formData
+    if (data) {
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key])
+      })
+    }
     axios.post(action, formData, {
       // 文件上传时到头信息
-      headers: { 'Content-type': 'multipart/form-data' },
+      headers: { ...headers, 'Content-type': 'multipart/form-data' },
+      withCredentials,
       onUploadProgress: (e) => {
         // axios支持文件上传进度
         const percentage = Math.round((e.loaded * 100) / e.total) || 0
@@ -101,12 +126,11 @@ export const Upload: FC<UploadProps> = (props) => {
         const result = beforeUpload(file)
         // 如果传入的是Promise，则获取处理后的file
         if (result && result instanceof Promise) {
-          result.then(processedFile => {
+          result.then((processedFile) => {
             post(processedFile)
           })
-        }
-        // 接受的如果是bool类型，false直接不执行，true才继续上传流程
-        if (result !== false) {
+        } else if (result !== false) {
+          // 接受的如果是bool类型，false直接不执行，true才继续上传流程
           post(file)
         }
       }
@@ -127,8 +151,8 @@ export const Upload: FC<UploadProps> = (props) => {
     fileInput.current && (fileInput.current.value = '')
   }
   const handleRemove = (file: UploadFile) => {
-    setFileList(prevList => {
-      return prevList.filter(item => item.uid !== file.uid)
+    setFileList((prevList) => {
+      return prevList.filter((item) => item.uid !== file.uid)
     })
     onRemove && onRemove(file)
   }
@@ -138,7 +162,7 @@ export const Upload: FC<UploadProps> = (props) => {
       <Button btnType='primary' onClick={handleClick}>
         上传文件
       </Button>
-      <input type='file' ref={fileInput} className='upload-file-input' style={{ display: 'none' }} onChange={handleFileChange} />
+      <input type='file' accept={accept} multiple={multiple} ref={fileInput} className='upload-file-input' style={{ display: 'none' }} onChange={handleFileChange} />
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   )

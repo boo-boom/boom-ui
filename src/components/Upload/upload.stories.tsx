@@ -39,6 +39,12 @@ const uploadBase = () => (
     onChange={action("onChange")}
     beforeUpload={filePromise}
     defaultFileList={defaultFileList}
+    headers={{'X-Powered-By': 'boomUI'}}
+    data={{'key': 'value'}}
+    withCredentials
+    accept="image/gif, image/jpeg"
+    // name="test-name"
+    multiple
   />
 )
 
