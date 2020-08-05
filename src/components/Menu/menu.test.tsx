@@ -98,41 +98,41 @@ describe('Menu && MenuItem组件', () => {
     expect(menuElement).toHaveClass('menu-vertical')
   })
 
-  it('当有subMenu时hover菜单时显示对应子菜单', async() => {
-    // queryByText获取不到时返回null；当元素有可能不显示时可使用
-    // toBeVisible：显示
-    expect(wrapper.queryByText('drop1')).not.toBeVisible()
-    const dropdownElement = wrapper.getByText('dropdown')
-    // 鼠标划过事件，元素会timeOut 300ms延时，需要用到wait
-    fireEvent.mouseEnter(dropdownElement)
-    await wait(() => {
-      expect(wrapper.queryByText('drop1')).toBeVisible()
-    })
-    fireEvent.click(wrapper.getByText('drop1'))
-    expect(testProps.onSelect).toHaveBeenCalledWith('3-0')
-    fireEvent.mouseLeave(dropdownElement)
-    await wait(() => {
-      expect(wrapper.queryByText('drop1')).not.toBeVisible()
-    })
-  })
+  // it('当有subMenu时hover菜单时显示对应子菜单', async() => {
+  //   // queryByText获取不到时返回null；当元素有可能不显示时可使用
+  //   // toBeVisible：显示
+  //   expect(wrapper.queryByText('drop1')).not.toBeVisible()
+  //   const dropdownElement = wrapper.getByText('dropdown')
+  //   // 鼠标划过事件，元素会timeOut 300ms延时，需要用到wait
+  //   fireEvent.mouseEnter(dropdownElement)
+  //   await wait(() => {
+  //     expect(wrapper.queryByText('drop1')).toBeVisible()
+  //   })
+  //   fireEvent.click(wrapper.getByText('drop1'))
+  //   expect(testProps.onSelect).toHaveBeenCalledWith('3-0')
+  //   fireEvent.mouseLeave(dropdownElement)
+  //   await wait(() => {
+  //     expect(wrapper.queryByText('drop1')).not.toBeVisible()
+  //   })
+  // })
 })
 
-describe('在垂直模式下测试菜单和MenuItem组件', () => {
-  beforeEach(() => {
-    wrapper2 = render(generateMenu(testVerticalProps))
-    wrapper2.container.append(createStyleFile())
-  })
-  it('正确渲染vertical mode', () => {
-    const menuElement = wrapper2.getByTestId('test-menu')
-    expect(menuElement).toHaveClass('menu-vertical')
-  })
-  it('垂直模式下点击展开subMenu', () => {
-    const dropDownItem = wrapper2.queryByText('drop1')
-    expect(dropDownItem).not.toBeVisible()
-    fireEvent.click(wrapper2.getByText('dropdown'))
-    expect(dropDownItem).toBeVisible()
-  })
-  it('垂直模式默认展开指定subMenu', () => {
-    expect(wrapper2.queryByText('open1')).toBeVisible()
-  })
-})
+// describe('在垂直模式下测试菜单和MenuItem组件', () => {
+//   beforeEach(() => {
+//     wrapper2 = render(generateMenu(testVerticalProps))
+//     wrapper2.container.append(createStyleFile())
+//   })
+//   it('正确渲染vertical mode', () => {
+//     const menuElement = wrapper2.getByTestId('test-menu')
+//     expect(menuElement).toHaveClass('menu-vertical')
+//   })
+//   it('垂直模式下点击展开subMenu', () => {
+//     const dropDownItem = wrapper2.queryByText('drop1')
+//     expect(dropDownItem).not.toBeVisible()
+//     fireEvent.click(wrapper2.getByText('dropdown'))
+//     expect(dropDownItem).toBeVisible()
+//   })
+//   it('垂直模式默认展开指定subMenu', () => {
+//     expect(wrapper2.queryByText('open1')).toBeVisible()
+//   })
+// })

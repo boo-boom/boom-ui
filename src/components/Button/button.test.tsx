@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import Button, { ButtonProps, ButtonSize, ButtonType } from './button'
+import Button, { ButtonProps } from './button'
 
 // test('Button组件测试', () => {
 //   const wrapper = render(<Button>Nice</Button>)
@@ -14,13 +14,13 @@ const defaultProps = {
 }
 
 const testPrimaryProps: ButtonProps = {
-  size: ButtonSize.Large,
-  btnType: ButtonType.Primary,
+  size: 'lg',
+  btnType: 'primary',
   className: 'testClass'
 }
 
 const testLinkProps: ButtonProps = {
-  btnType: ButtonType.Link,
+  btnType: 'link',
   href: 'https://abc'
 }
 
