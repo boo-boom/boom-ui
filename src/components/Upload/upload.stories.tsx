@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import Upload, { UploadFile } from './upload'
+import Button from './../Button/button'
 
 // beforeUpload返回boolean
 // const checkFileSize = (file: File) => {
@@ -45,7 +46,10 @@ const uploadBase = () => (
     accept="image/gif, image/jpeg"
     // name="test-name"
     multiple
-  />
+    drag
+  >
+    <Button btnType='primary'>上传文件</Button>
+  </Upload>
 )
 
 storiesOf('Upload', module)

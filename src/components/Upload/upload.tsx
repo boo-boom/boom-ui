@@ -1,7 +1,7 @@
 import React, { FC, useRef, useState, ChangeEvent, CSSProperties } from 'react'
 import axios from 'axios'
-import Button from './../Button/button'
 import UploadList from './uploadList'
+import Dragger from './dragger'
 
 // 文件列表定义
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
@@ -52,7 +52,25 @@ export interface UploadProps {
 }
 
 export const Upload: FC<UploadProps> = (props) => {
-  const { action, name, data, accept, multiple, withCredentials, headers, defaultFileList, style, beforeUpload, onProgress, onSuccess, onError, onChange, onRemove } = props
+  const { 
+    action,
+    name,
+    data,
+    accept,
+    multiple,
+    withCredentials,
+    headers,
+    defaultFileList,
+    style,
+    children,
+    drag,
+    beforeUpload,
+    onProgress,
+    onSuccess,
+    onError,
+    onChange,
+    onRemove,
+  } = props
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
   const fileInput = useRef<HTMLInputElement>(null)
   // 更新fileList对应file的状态, Partial将定义的属性变为可选
@@ -115,7 +133,7 @@ export const Upload: FC<UploadProps> = (props) => {
       onChange && onChange(file)
     })
   }
-  const uploadFile = (files: FileList) => {
+  const uploadFiles = (files: FileList) => {
     // 获取input file时得到到为一个集合，需要转换为数组
     const postFiles = Array.from(files)
     // 将file遍历上传
@@ -146,7 +164,7 @@ export const Upload: FC<UploadProps> = (props) => {
     const files = e.target.files
     if (!files) return
     // 选择图片后进行对文件上传
-    uploadFile(files)
+    uploadFiles(files)
     // 获取玩文件信息后，将input的value清空
     fileInput.current && (fileInput.current.value = '')
   }
@@ -159,9 +177,13 @@ export const Upload: FC<UploadProps> = (props) => {
 
   return (
     <div className='upload-component' style={style}>
-      <Button btnType='primary' onClick={handleClick}>
-        上传文件
-      </Button>
+      <div className="upload-input" onClick={handleClick}>
+        { 
+          drag
+          ? <Dragger onFile={(files) => {uploadFiles(files)}}>{children}</Dragger>
+          : children
+        }
+      </div>
       <input type='file' accept={accept} multiple={multiple} ref={fileInput} className='upload-file-input' style={{ display: 'none' }} onChange={handleFileChange} />
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
