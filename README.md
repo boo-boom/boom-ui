@@ -1,4 +1,6 @@
-## boom-component
+# boom-component
+
+[![Build Status](https://travis-ci.com/boo-boom/boom-ui.svg?branch=master)](https://travis-ci.com/boo-boom/boom-ui)
 
 使用 React Hooks 和 typescript，完成的UI组件库
 
