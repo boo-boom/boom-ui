@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = ({ config }) => {
-  // 解决build时CssDependency报错
+  // 解决build文档时CssDependency报错
   if (config.mode === 'production') {
     config.plugins.push(
       new MiniCssExtractPlugin({
