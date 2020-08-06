@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/boo-boom/boom-ui/main.min.css",
+    "main.js": "/boo-boom/boom-ui/main.3b6fada24564d55669e7.bundle.js",
+    "main.css.map": "/boo-boom/boom-ui/main.min.css.map",
+    "main.js.map": "/boo-boom/boom-ui/main.3b6fada24564d55669e7.bundle.js.map",
+    "runtime~main.js": "/boo-boom/boom-ui/runtime~main.3b6fada24564d55669e7.bundle.js",
+    "runtime~main.js.map": "/boo-boom/boom-ui/runtime~main.3b6fada24564d55669e7.bundle.js.map",
+    "vendors~main.css": "/boo-boom/boom-ui/vendors~main.min.css",
+    "vendors~main.js": "/boo-boom/boom-ui/vendors~main.3b6fada24564d55669e7.bundle.js",
+    "vendors~main.css.map": "/boo-boom/boom-ui/vendors~main.min.css.map",
+    "vendors~main.js.map": "/boo-boom/boom-ui/vendors~main.3b6fada24564d55669e7.bundle.js.map",
+    "iframe.html": "/boo-boom/boom-ui/iframe.html",
+    "precache-manifest.9cb628ef98e004876dd5f3653b0876ae.js": "/boo-boom/boom-ui/precache-manifest.9cb628ef98e004876dd5f3653b0876ae.js",
+    "service-worker.js": "/boo-boom/boom-ui/service-worker.js"
+  },
+  "entrypoints": [
+    "runtime~main.3b6fada24564d55669e7.bundle.js",
+    "vendors~main.css",
+    "vendors~main.min.css",
+    "vendors~main.3b6fada24564d55669e7.bundle.js",
+    "main.css",
+    "main.min.css",
+    "main.3b6fada24564d55669e7.bundle.js"
+  ]
+}
