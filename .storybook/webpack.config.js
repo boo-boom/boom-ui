@@ -1,4 +1,14 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 module.exports = ({ config }) => {
+  // 解决build时CssDependency报错
+  if (config.mode === 'production') {
+    config.plugins.push(
+      new MiniCssExtractPlugin({
+        filename: '[name].min.css',
+      }),
+    );
+  }
   config.module.rules.push({
     test: /\.tsx?$/,
     use: [
